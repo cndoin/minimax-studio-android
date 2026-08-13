@@ -6,7 +6,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_minimax"
-        android:label="MiniMax Studio"
+        android:label="@string/app_name"
         android:roundIcon="@drawable/ic_minimax"
         android:supportsRtl="true"
         android:theme="@style/Theme.MiniMaxStudio">

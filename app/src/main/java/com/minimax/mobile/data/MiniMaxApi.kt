@@ -233,13 +233,14 @@ class MiniMaxApi(context: Context) {
             .header("Accept", "application/json")
         val requestBody = body?.toRequestBody(JSON_MEDIA_TYPE)
         requestBuilder.method(method, requestBody)
-        val response = client.newCall(requestBuilder.build()).execute()
-        val responseText = response.body?.string().orEmpty()
-        if (!response.isSuccessful) {
-            throw MiniMaxApiException("HTTP ${response.code}：${extractError(responseText)}")
+        client.newCall(requestBuilder.build()).execute().use { response ->
+            val responseText = response.body?.string().orEmpty()
+            if (!response.isSuccessful) {
+                throw MiniMaxApiException("HTTP ${response.code}：${extractError(responseText)}")
+            }
+            runCatching { JSONObject(responseText) }
+                .getOrElse { throw MiniMaxApiException("MiniMax 返回了无法解析的数据") }
         }
-        runCatching { JSONObject(responseText) }
-            .getOrElse { throw MiniMaxApiException("MiniMax 返回了无法解析的数据") }
     }
 
     private fun extractError(text: String): String {

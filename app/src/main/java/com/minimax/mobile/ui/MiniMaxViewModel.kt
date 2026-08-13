@@ -69,10 +69,11 @@ class MiniMaxViewModel(context: Context) {
 
     fun saveSettings(newKey: String, newRegion: MiniMaxRegion) {
         try {
-        apiKeyStore.save(newKey.trim(), newRegion)
-        apiKey = newKey.trim()
-        region = newRegion
-        notice = "设置已保存，API Key 只会保存在本机。"
+            val cleanKey = newKey.trim()
+            apiKeyStore.save(cleanKey, newRegion)
+            apiKey = cleanKey
+            region = newRegion
+            notice = "设置已保存，API Key 只会保存在本机。"
         } catch (error: Exception) {
             notice = "API Key 保存失败：${error.message ?: "当前设备不支持安全存储"}"
         }

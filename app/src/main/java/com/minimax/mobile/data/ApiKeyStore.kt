@@ -11,7 +11,7 @@ import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
 
-/** Stores the API key in the app's private storage, encrypted when possible. */
+/** Stores the API key encrypted with an Android Keystore-backed AES key. */
 class ApiKeyStore(context: Context) {
     private val appContext = context.applicationContext
     private val preferences = appContext.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
@@ -22,7 +22,7 @@ class ApiKeyStore(context: Context) {
             val decrypted = runCatching { decrypt(encrypted) }.getOrNull()
             if (!decrypted.isNullOrBlank()) return decrypted
         }
-        return preferences.getString(KEY_API_FALLBACK, "").orEmpty()
+        return ""
     }
 
     fun readRegion(): MiniMaxRegion {
@@ -34,18 +34,14 @@ class ApiKeyStore(context: Context) {
         val editor = preferences.edit().putString(KEY_REGION, region.id)
 
         if (cleanKey.isBlank()) {
-            editor.remove(KEY_API).remove(KEY_API_FALLBACK).apply()
+            editor.remove(KEY_API).remove(LEGACY_KEY_API_FALLBACK).apply()
             return
         }
 
-        // Some vendor Android Keystore implementations reject AES-256 or the
-        // old key format. Keep this UI action non-fatal and try a local fallback.
-        val encrypted = runCatching { encrypt(cleanKey) }.getOrNull()
-        if (encrypted != null) {
-            editor.putString(KEY_API, encrypted).remove(KEY_API_FALLBACK).apply()
-        } else {
-            editor.remove(KEY_API).putString(KEY_API_FALLBACK, cleanKey).apply()
-        }
+        // Never fall back to plaintext storage. If Keystore is unavailable,
+        // fail the save so the UI can explain the problem to the user.
+        val encrypted = encrypt(cleanKey)
+        editor.putString(KEY_API, encrypted).remove(LEGACY_KEY_API_FALLBACK).apply()
     }
 
     fun clear() {
@@ -112,7 +108,7 @@ class ApiKeyStore(context: Context) {
         private const val IV_LENGTH = 12
         private const val PREFERENCES = "mini_max_secure_config"
         private const val KEY_API = "api_key"
-        private const val KEY_API_FALLBACK = "api_key_local_fallback"
+        private const val LEGACY_KEY_API_FALLBACK = "api_key_local_fallback"
         private const val KEY_REGION = "region"
     }
 }

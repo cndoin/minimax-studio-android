@@ -7,7 +7,7 @@
 <p><strong>一个简洁、原生、开源的 Android MiniMax 全模态客户端。</strong></p>
 
 <p>
-  <a href="downloads/MiniMaxStudio-v1.0.0-debug.apk"><strong>⬇ 直接下载 APK</strong></a>
+  <a href="https://github.com/cndoin/minimax-studio-android/releases/download/v1.0.0/MiniMaxStudio-v1.0.0-debug.apk"><strong>⬇ 直接下载 APK</strong></a>
   &nbsp;·&nbsp;
   <a href="#快速开始">开始构建</a>
   &nbsp;·&nbsp;
@@ -55,11 +55,11 @@
 
 <div align="center">
 
-### [⬇ 下载 MiniMax Studio v1.0.0 APK](downloads/MiniMaxStudio-v1.0.0-debug.apk)
+### [⬇ 下载 MiniMax Studio v1.0.0 APK](https://github.com/cndoin/minimax-studio-android/releases/download/v1.0.0/MiniMaxStudio-v1.0.0-debug.apk)
 
 </div>
 
-这是一个未签名的 Debug 构建，适合体验和测试。安装前请在 Android 设置中允许当前浏览器或文件管理器安装应用。APK 位于仓库的 [`downloads/`](downloads/) 目录中。
+这是一个未签名的 Debug 构建，适合体验和测试。安装前请在 Android 设置中允许当前浏览器或文件管理器安装应用。APK 同时附在 [v1.0.0 Release](https://github.com/cndoin/minimax-studio-android/releases/tag/v1.0.0) 中，方便直接下载。
 
 <details>
 <summary>校验文件完整性</summary>

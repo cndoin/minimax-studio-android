@@ -10,6 +10,10 @@ captures/
 *.aab
 output-metadata.json
 
+# Public download artifacts intentionally tracked in the repository
+!downloads/
+!downloads/*.apk
+
 # Local machine configuration
 local.properties
 *.iml

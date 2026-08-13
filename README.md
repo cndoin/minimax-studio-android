@@ -12,6 +12,20 @@ MiniMax Studio 将文本对话、图片、视频、语音、音乐、视觉理�
 
 > 项目处于早期版本，接口和模型支持可能随 MiniMax 开放平台变化。欢迎体验、反馈和贡献。
 
+## 直接下载
+
+不想自己构建？可以直接下载已构建好的 Android 安装包：
+
+**[下载 MiniMax Studio v1.0.0 APK](downloads/MiniMaxStudio-v1.0.0-debug.apk)**
+
+安装前请在 Android 设置中允许当前浏览器或文件管理器安装应用。这个 APK 是未签名的 Debug 构建，适合体验和测试；正式分发前请等待项目提供签名的 Release 构建。APK 文件保存在仓库的 [`downloads/`](downloads/) 目录中。
+
+文件校验：
+
+```text
+SHA-256: 7B1CC746A889BCA1BA0260B26ECF1CEDB0BBF7EE8C6940E7E3C5E8E09A70BA2B
+```
+
 ## 功能一览
 
 | 模块 | 能力 |
